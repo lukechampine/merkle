@@ -42,5 +42,5 @@ Benchmarks are calculating by summing the `user` and `sys` output of `time`.
 
 | implementation | time       |
 |:---------------|-----------:|
-| Go             | 0.660s     |
+| Go             | 0.640s     |
 
