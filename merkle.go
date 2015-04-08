@@ -16,9 +16,9 @@ type stack struct {
 }
 
 type elem struct {
-	next   *elem
 	height int
 	sum    []byte
+	next   *elem
 }
 
 func (s *stack) pop() (e *elem) {
@@ -55,10 +55,7 @@ func (s *stack) ReadFrom(r io.Reader) (n int64, err error) {
 		} else if copied == 0 {
 			break
 		}
-		s.push(&elem{
-			height: 1,
-			sum:    s.hash.Sum(nil),
-		})
+		s.push(&elem{0, s.hash.Sum(nil), nil})
 	}
 	return n, nil
 }
