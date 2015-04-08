@@ -6,7 +6,7 @@ Merkle
 | language   | status      |
 |------------|-------------|
 | Go         | Complete    |
-| C          | Not started |
+| C          | Complete    |
 | Haskell    | Not started |
 
 Merkle root specification
@@ -42,5 +42,6 @@ Benchmarks are calculating by summing the `user` and `sys` output of `time`.
 
 | implementation | time       |
 |:---------------|-----------:|
+| C              | 0.172s     |
 | Go             | 0.640s     |
 
