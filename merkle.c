@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "sha256.h"
 
-#define LEAFSIZE 64
+#define SEGSIZE 64
 #define READSIZE 32
 
 // forward declarations
@@ -69,7 +69,7 @@ void readFrom(stack* s, FILE* f) {
 	while (!ferror(f) && !feof(f)) {
 		elem* e = calloc(1, sizeof(elem));
 		sha256_starts(&ctx);
-		for (i = 0; i < LEAFSIZE; i += READSIZE) {
+		for (i = 0; i < SEGSIZE; i += READSIZE) {
 			size_t n = fread(leaf, 1, READSIZE, f);
 			sha256_update(&ctx, leaf, n);
 		}

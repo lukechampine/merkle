@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-const leafSize = 64 // bytes
+const segSize = 64 // bytes
 
 type stack struct {
 	head *elem
@@ -48,7 +48,7 @@ func (s *stack) collapse() {
 func (s *stack) ReadFrom(r io.Reader) (n int64, err error) {
 	for {
 		s.hash.Reset()
-		copied, err := io.CopyN(s.hash, r, leafSize)
+		copied, err := io.CopyN(s.hash, r, segSize)
 		n += copied
 		if err != nil && err != io.EOF {
 			return n, err
