@@ -3,6 +3,7 @@
 #include "sha256.h"
 
 #define LEAFSIZE 64
+#define READSIZE 32
 
 // forward declarations
 typedef struct stack stack;
@@ -63,17 +64,16 @@ uint8* root(stack* s) {
 }
 
 void readFrom(stack* s, FILE* f) {
+	int i;
+	uint8* leaf = calloc(1, READSIZE);
 	while (!ferror(f) && !feof(f)) {
-		// create elem
 		elem* e = calloc(1, sizeof(elem));
-		// read data
-		uint8* leaf = calloc(1, LEAFSIZE);
-		size_t n = fread(leaf, 1, LEAFSIZE, f);
-		// calculate hash
 		sha256_starts(&ctx);
-		sha256_update(&ctx, leaf, n);
+		for (i = 0; i < LEAFSIZE; i += READSIZE) {
+			size_t n = fread(leaf, 1, READSIZE, f);
+			sha256_update(&ctx, leaf, n);
+		}
 		sha256_finish(&ctx, e->sum);
-		// push
 		push(s, e);
 	}
 }
