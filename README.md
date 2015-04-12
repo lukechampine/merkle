@@ -7,7 +7,7 @@ Merkle
 |------------|-------------|
 | Go         | Complete    |
 | C          | Complete    |
-| Haskell    | Not started |
+| Haskell    | Complete    |
 
 Merkle root specification
 -------------------------
@@ -42,8 +42,9 @@ Benchmarks are given for various segment sizes (in bytes). The throughput is cal
 
 Note that all segment sizes larger than the input data will result in equal performance, since only one hash is required. Therefore, such a benchmark can be used to gauge the throughput of the implementation's SHA256 algorithm.
 
-| seg. size | 16        | 64        | 256       | 1024      | 4096     | 2^23     |
-|:----------|----------:|----------:|----------:|----------:|---------:|---------:|
-| C         | 7.88 MB/s | 24.7 MB/s | 52.4 MB/s | 83.9 MB/s | 105 MB/s | 105 MB/s |
-| Go        | 1.66 MB/s | 6.36 MB/s | 24.7 MB/s | 69.9 MB/s | 140 MB/s | 210 MB/s |
+| seg. size | 16            | 64            | 256           | 1024         | 4096         | 2^23         |
+|:----------|--------------:|--------------:|--------------:|-------------:|-------------:|-------------:|
+| C         | **7.88 MB/s** | **24.7 MB/s** | 52.4 MB/s     | 83.9 MB/s    | 105 MB/s     | 105 MB/s     |
+| Go        | 1.66 MB/s     | 6.36 MB/s     | 24.7 MB/s     | 69.9 MB/s    | 140 MB/s     | 210 MB/s     |
+| Haskell   | 2.98 MB/s     | 15.5 MB/s     | **55.2 MB/s** | **131 MB/s** | **210 MB/s** | **262 MB/s** |
 
