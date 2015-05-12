@@ -10,8 +10,8 @@ use serialize::hex::ToHex;
 
 const SEGSIZE: usize = 64;
 
-struct Stack {
-	hash: crypto::sha2::Sha256, // TODO: no easy way to make this generic??
+struct Stack<T: crypto::digest::Digest> {
+	hash: T,
 	elems: Vec<Elem>,
 }
 
@@ -20,10 +20,10 @@ struct Elem {
 	sum: [u8;32],
 }
 
-impl Stack {
-	fn new() -> Stack {
+impl<T: crypto::digest::Digest> Stack<T> {
+	fn new(hash: T) -> Stack<T> {
 		Stack{
-			hash: Sha256::new(),
+			hash: hash,
 			elems: Vec::new(),
 		}
 	}
@@ -79,7 +79,7 @@ fn main() {
 		Err(..)  => panic!("couldn't open test file"),
 	};
 
-	let mut s = Stack::new();
+	let mut s = Stack::new(Sha256::new());
 	s.read_from(&mut file);
 
 	println!("{}", s.root());
