@@ -46,11 +46,11 @@ impl Stack {
 	}
 
 	fn read_from(&mut self, file: &mut std::fs::File) {
-		let mut buf = [0u8;SEGSIZE];
+		let mut buf = Box::new([0u8;SEGSIZE]);
 		loop {
 			let mut e = Elem{height: 0, sum: [0u8;32]};
 			self.hash.reset();
-			match file.read(&mut buf) {
+			match file.read(&mut *buf) {
 				Ok(0)  => break,
 				Ok(n)  => self.hash.input(&buf[0..n]),
 				Err(_) => panic!("read failed"),
