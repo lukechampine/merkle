@@ -46,7 +46,7 @@ Note that all segment sizes larger than the input data will result in equal perf
 | seg. size | 16             | 64            | 256          | 1024         | 4096         | 2^23         |
 |:----------|---------------:|--------------:|-------------:|-------------:|-------------:|-------------:|
 | Go        | 1.66 MB/s      | 6.36 MB/s     | 24.7 MB/s    | 69.9 MB/s    | 140 MB/s     | 210 MB/s     |
-| C         | 7.88 MB/s      | 24.7 MB/s     | 52.4 MB/s    | 83.9 MB/s    | 105 MB/s     | 105 MB/s     |
+| C         | 11.0 MB/s      | 33.6 MB/s     | 87.4 MB/s    | 108 MB/s     | 123 MB/s     | 140 MB/s     |
 | Haskell   | 3.08 MB/s      | 16.4 MB/s     | 61.7 MB/s    | 150 MB/s     | **210 MB/s** | **262 MB/s** |
 | Rust      | **14.56 MB/s** | **44.6 MB/s** | **105 MB/s** | **155 MB/s** | 191 MB/s     | 175 MB/s     |
 
