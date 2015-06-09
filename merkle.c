@@ -51,6 +51,7 @@ void collapse(stack* s) {
 	sha256_update(&ctx, oldhead->sum, 32);
 	sha256_finish(&ctx, s->head->sum);
 	s->head->height++;
+	free(oldhead);
 }
 
 uint8* root(stack* s) {
