@@ -45,10 +45,10 @@ func (s *stack) collapse() {
 	s.head.height++
 }
 
-// copySeg behaves like io.Copy, except that it allocates an exactly-sized
-// buffer. This prevents excessive garbage collection.
-func copySeg(dst io.Writer, src io.Reader) (written int, err error) {
-	buf := make([]byte, segSize)
+// copySeg copies a segment from src to dst. It functions similarly to
+// io.CopyBuffer, except that it uses io.ReadFull to ensure that a full segment
+// is always copied (if possible).
+func copySeg(dst io.Writer, src io.Reader, buf []byte) (written int, err error) {
 	n, err := io.ReadFull(src, buf)
 	if err != nil && err != io.ErrUnexpectedEOF {
 		return n, err
@@ -57,9 +57,10 @@ func copySeg(dst io.Writer, src io.Reader) (written int, err error) {
 }
 
 func (s *stack) ReadFrom(r io.Reader) (n int64, err error) {
+	buf := make([]byte, segSize)
 	for {
 		s.hash.Reset()
-		copied, err := copySeg(s.hash, r)
+		copied, err := copySeg(s.hash, r, buf)
 		n += int64(copied)
 		if err != nil && err != io.EOF {
 			return n, err
