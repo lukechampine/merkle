@@ -9,6 +9,7 @@ Merkle
 | C          | Complete    |
 | Haskell    | Complete    |
 | Rust       | Complete    |
+| Perl       | Complete    |
 
 Merkle root specification
 -------------------------
@@ -49,6 +50,7 @@ Note that all segment sizes larger than the input data will result in equal perf
 | C         | 11.0 MB/s      | 33.6 MB/s     | 87.4 MB/s    | 108 MB/s     | 123 MB/s     | 140 MB/s     |
 | Haskell   | 3.08 MB/s      | 16.4 MB/s     | 61.7 MB/s    | 150 MB/s     | **210 MB/s** | **262 MB/s** |
 | Rust      | **14.56 MB/s** | **44.6 MB/s** | **105 MB/s** | **155 MB/s** | 191 MB/s     | 175 MB/s     |
+| Perl      | 5.37 MB/s      | 18.64 MB/s    | 51.2 MB/s    | 95.3 MB/s    | 110 MB/s     | 120 MB/s     |
 
 In addition, the hash rate of each implementation's SHA256 algorithm was benchmarked by calculating the hash of the string "test.dat" 10 million times in a loop.
 
@@ -58,5 +60,6 @@ In addition, the hash rate of each implementation's SHA256 algorithm was benchma
 | C       | 4.61s     | 2.168 MH/s         |
 | Haskell | 3.66s     | 2.732 MH/s         |
 | Rust    | **3.05s** | **3.274 MH/s**     |
+| Perl    | 9.95s     | 1.005 MH/s         |
 
 This explains Rust's speed advantage over C, especially with small segment sizes. For example, with seg. size 16, the C implementation took 0.081 seconds longer than the Rust implementation, but the difference in hash rate accounts for half of that difference.
