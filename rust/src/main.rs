@@ -40,7 +40,7 @@ impl<T: crypto::digest::Digest> Stack<T> {
 		self.hash.reset();
 		self.hash.input(&self.elems[last-1].sum);
 		self.hash.input(&self.elems[last].sum);
-		self.hash.result(&mut self.elems[last-1].sum); // overwrite memory
+		self.hash.result(&mut self.elems[last-1].sum);
 		self.elems[last-1].height += 1;
 		self.elems.pop();
 	}

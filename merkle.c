@@ -5,7 +5,6 @@
 #define SEGSIZE 64
 #define READSIZE 32
 
-// forward declarations
 typedef struct stack stack;
 typedef struct elem elem;
 void push(stack*, elem*);
@@ -15,7 +14,6 @@ uint8* root(stack*);
 void readFrom(stack*, FILE*);
 void printHash(uint8*);
 
-// types
 struct stack {
 	elem* head;
 };
@@ -26,10 +24,8 @@ struct elem {
 	elem* next;
 };
 
-// global variables
 sha256_context ctx;
 
-// function definitions
 void push(stack* s, elem* e) {
 	e->next = s->head;
 	s->head = e;

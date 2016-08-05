@@ -21,6 +21,5 @@ merkleRoot hs  = joinHash (merkleRoot left) (merkleRoot right) where
 	(left, right) = splitAt i hs
 	i = until (\x -> x*2 >= length hs) (*2) 1
 
--- note that this implementation reads the entire file into memory
 main :: IO ()
 main = B.readFile "test.dat" >>= print . merkleRoot . map hash . segments

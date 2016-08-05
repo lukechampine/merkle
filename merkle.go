@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-const segSize = 64 // bytes
+const segSize = 64
 
 type stack struct {
 	head *elem
@@ -41,13 +41,10 @@ func (s *stack) collapse() {
 	s.hash.Reset()
 	s.hash.Write(s.head.sum)
 	s.hash.Write(oldhead.sum)
-	s.hash.Sum(s.head.sum[:0]) // reuse head's memory
+	s.hash.Sum(s.head.sum[:0])
 	s.head.height++
 }
 
-// copySeg copies a segment from src to dst. It functions similarly to
-// io.CopyBuffer, except that it uses io.ReadFull to ensure that a full segment
-// is always copied (if possible).
 func copySeg(dst io.Writer, src io.Reader, buf []byte) (written int, err error) {
 	n, err := io.ReadFull(src, buf)
 	if err != nil && err != io.ErrUnexpectedEOF {
