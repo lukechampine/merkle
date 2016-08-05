@@ -10,6 +10,7 @@ Merkle
 | Haskell    | Complete    |
 | Rust       | Complete    |
 | Perl       | Complete    |
+| D          | Complete    |
 
 Merkle root specification
 -------------------------
@@ -42,7 +43,7 @@ Benchmarks
 
 Benchmarks are given for various segment sizes (in bytes). The throughput is calculated by dividing the size of the input by the execution time, which is obtained by summing the `user` and `sys` outputs of the `time` utility.
 
-Note that all segment sizes larger than the input data will result in equal performance, since only one hash is required. Therefore, such a benchmark can be used to gauge the basic throughput of the implemention, i.e. how fast it can feed a file into its SHA256 algorithm.
+Note that all segment sizes larger than the input data will result in equal performance, since only one hash is required. Therefore, such a benchmark can be used to gauge the basic throughput of the implementation, i.e. how fast it can feed a file into its SHA256 algorithm.
 
 | seg. size | 16             | 64            | 256          | 1024         | 4096         | 2^23         |
 |:----------|---------------:|--------------:|-------------:|-------------:|-------------:|-------------:|
@@ -51,15 +52,17 @@ Note that all segment sizes larger than the input data will result in equal perf
 | Haskell   | 3.08 MB/s      | 16.4 MB/s     | 61.7 MB/s    | 150 MB/s     | **210 MB/s** | **262 MB/s** |
 | Rust      | **14.56 MB/s** | **44.6 MB/s** | **105 MB/s** | **155 MB/s** | 191 MB/s     | 175 MB/s     |
 | Perl      | 5.37 MB/s      | 18.64 MB/s    | 51.2 MB/s    | 95.3 MB/s    | 110 MB/s     | 120 MB/s     |
+| D         | 3.36 MB/s      | 10.13 MB/s    | 23.8 MB/s    | 36.2 MB/s    | 41.1 MB/s    | 43.2 MB/s    |
 
 In addition, the hash rate of each implementation's SHA256 algorithm was benchmarked by calculating the hash of the string "test.dat" 10 million times in a loop.
 
 |         | time      | hash rate          |
 |:--------|-----------|--------------------|
-| Go      | 4.45s     | 2.247 MH/s         |
-| C       | 4.61s     | 2.168 MH/s         |
-| Haskell | 3.66s     | 2.732 MH/s         |
+| Go      |  4.45s    | 2.247 MH/s         |
+| C       |  4.61s    | 2.168 MH/s         |
+| Haskell |  3.66s    | 2.732 MH/s         |
 | Rust    | **3.05s** | **3.274 MH/s**     |
-| Perl    | 9.95s     | 1.005 MH/s         |
+| Perl    |  9.95s    | 1.005 MH/s         |
+| D       | 15.19s    | 0.658 MH/s         |
 
 This explains Rust's speed advantage over C, especially with small segment sizes. For example, with seg. size 16, the C implementation took 0.081 seconds longer than the Rust implementation, but the difference in hash rate accounts for half of that difference.
