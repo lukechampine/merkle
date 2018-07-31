@@ -5,7 +5,7 @@ open FILE, "test.dat" or die "Couldn't open file: $!";
 binmode FILE;
 
 my @hashes;
-while (read FILE, $segment, SEGSIZE) {
+while (read FILE, my $segment, SEGSIZE) {
 	push @hashes, (sha256 $segment);
 }
 close FILE;
@@ -13,8 +13,8 @@ close FILE;
 while ((scalar @hashes) > 1) {
 	my @joinedHashes;
 	while (my @pair = splice @hashes, 0, 2) {
-		push @joinedHashes, @pair[1] ? (sha256 @pair) : @pair[0];
+		push @joinedHashes, $pair[1] ? (sha256 @pair) : $pair[0];
 	}
 	@hashes = @joinedHashes;
 }
-print unpack("H*", @hashes[0]), "\n";
+print unpack("H*", $hashes[0]), "\n";
