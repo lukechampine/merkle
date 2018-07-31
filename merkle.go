@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"crypto/sha256"
 	"fmt"
 	"hash"
@@ -90,9 +91,10 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+	r := bufio.NewReader(file)
 
 	stack := New(sha256.New())
-	_, err = stack.ReadFrom(file)
+	_, err = stack.ReadFrom(r)
 	if err != nil {
 		fmt.Println(err)
 		return
