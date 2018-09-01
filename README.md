@@ -17,6 +17,8 @@ Merkle root specification
 
 A Merkle tree is a tree of hashes. Each node is formed by hashing the concatenation of the nodes below it. The leaves are formed by splitting the input data into segments and hashing each segment. The *Merkle root* is the root node of such a tree.
 
+**NOTE: This specification does not follow [RFC 6962](https://tools.ietf.org/html/rfc6962#section-2.1), which adds prefixes to prevent node hashes from colliding with leaf hashes. Without such prefixes, Merkle trees may be vulnerable to collision attacks. The code in this repo is not recommended for use in cryptographic contexts.**
+
 Implementation details
 ----------------------
 
