@@ -11,6 +11,7 @@ Merkle
 | Rust       | Complete    |
 | Perl       | Complete    |
 | D          | Complete    |
+| Zig        | Complete    |
 
 Merkle root specification
 -------------------------
